@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
       prev_page: collection.prev_page,
       total_pages: collection.total_pages,
       total_count: collection.total_count,
-      per_page: 10
+      per_page: Kaminari.config.default_per_page
     }
   end
 
