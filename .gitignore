@@ -1,0 +1,7 @@
+/.bundle
+/config/database.yml
+/log/*.log
+/tmp
+/.idea
+/public/uploads
+dump.rdb
