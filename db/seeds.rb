@@ -5,6 +5,6 @@ keywords = ["flower", "banana", "kiwi"]
     description: "Post #{keywords.sample} description",
     author: "user_#{i}",
     likes: rand(1...5),
-    image: "flower.jpg"
+    image: "flower#{rand(1...5)}.jpg"
   )
 end
