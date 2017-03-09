@@ -1,24 +1,11 @@
-# README
+# Basic api for react blog app
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+1) To start
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```console
+$ git clone https://github.com/badimalex/blog-server.git
+$ cd blog-server
+$ bundle
+$ rake db:create && rake db:migrate && rake db:seed
+$ rails s -p 3001
+```
