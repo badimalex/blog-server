@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
   def index
     @q = Post.ransack(params[:q])
-    @posts = @q.result.page(params[:page])
+    @posts = @q.result
+              .page(params[:page])
+              .per(params[:per_page])
     render json: @posts,
            url: request.base_url,
            meta: pagination_dict(@posts),
