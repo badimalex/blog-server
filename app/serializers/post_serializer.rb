@@ -4,7 +4,8 @@ class PostSerializer < ActiveModel::Serializer
   def meta
     {
       likes: object.likes,
-      author: object.author
+      author: object.author,
+      createdAt: object.created_at
     }
   end
 
