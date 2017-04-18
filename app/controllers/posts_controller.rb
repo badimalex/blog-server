@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
-  skip_before_filter :verify_authenticity_token, only: [:like, :unlike]
-  before_action :set_post, only: [:show, :like, :unlike]
+  skip_before_filter :verify_authenticity_token, only: [:like, :unlike, :update]
+  before_action :set_post, only: [:show, :like, :unlike, :update]
 
   def index
     @q = Post.ransack(params[:q])
@@ -30,10 +30,22 @@ class PostsController < ApplicationController
     render json: @post, url: request.base_url, status: 200
   end
 
+  def update
+    if @post.update(post_params)
+      render json: @post, url: request.base_url, status: 200
+    else
+      render json: @post.errors, status: 422
+    end
+  end
+
   private
 
   def set_post
     @post = Post.find params[:id]
+  end
+
+  def post_params
+    params.require(:post).permit :title, :description, :author, :created_at
   end
 
 end
