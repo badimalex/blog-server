@@ -9,10 +9,9 @@ module BlogServer
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
-        resource '*', :headers => :any, :methods => [:get, :patch, :options, :put]
+        resource '*', :headers => :any, :methods => [:get, :patch, :options, :put, :post]
       end
     end
-
 
     config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
 

@@ -1,5 +1,5 @@
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :title, :description, :meta, :image
+  attributes :id, :title, :description, :meta, :image, :comments
 
   def meta
     {
@@ -13,6 +13,13 @@ class PostSerializer < ActiveModel::Serializer
     {
       src: "#{@instance_options[:url]}/#{object.image}"
     }
+  end
+
+  def comments
+    object.comments.map do |c|
+      c.user_avatar = "#{@instance_options[:url]}/#{c.user_avatar}"
+    end
+    object.comments
   end
 
 end

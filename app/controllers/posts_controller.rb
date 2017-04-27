@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
 
-  skip_before_filter :verify_authenticity_token, only: [:like, :unlike, :update]
   before_action :set_post, only: [:show, :like, :unlike, :update]
 
   def index
