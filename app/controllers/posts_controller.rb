@@ -17,12 +17,12 @@ class PostsController < ApplicationController
 
   def like
     @post.like
-    render json: @post, status: 200
+    render json: @post, url: request.base_url, status: 200
   end
 
   def unlike
     @post.unlike
-    render json: @post, status: 200
+    render json: @post, url: request.base_url, status: 200
   end
 
   def show
