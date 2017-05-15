@@ -3,11 +3,7 @@ class Posts::CommentsController < ApplicationController
 
   def create
     @comment = @post.comments.new comment_params
-    if @comment.save
-      render status: 201, json: @comment
-    else
-      render status: 422, :json => { :errors => @comment.errors }
-    end
+    respond_success @comment.save, @comment
   end
 
   private

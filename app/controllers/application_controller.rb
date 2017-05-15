@@ -1,5 +1,9 @@
 class ApplicationController < ActionController::Base
+
+  include Shared::RespondCrud
+
   protect_from_forgery with: :exception
+
   skip_before_action :verify_authenticity_token, only: [:like, :unlike, :update, :create]
 
   def pagination_dict(collection)
