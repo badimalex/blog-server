@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :like, :unlike, :update]
 
   def index
-    @q = Post.ransack(params[:q])
+    @q = @model.ransack params[:q]
     @posts = @q.result
               .order(id: :desc)
               .page(params[:page])
@@ -15,32 +15,35 @@ class PostsController < ApplicationController
            status: 200
   end
 
-  def like
-    @post.like
-    render json: @post, url: request.base_url, status: 200
-  end
-
-  def unlike
-    @post.unlike
-    render json: @post, url: request.base_url, status: 200
-  end
-
   def show
     render json: @post, url: request.base_url, status: 200
   end
 
+  def create
+    @post = @model.new post_params
+    respond_success @post.save, @post
+  end
+
   def update
-    if @post.update(post_params)
-      render json: @post, url: request.base_url, status: 200
-    else
-      render json: @post.errors, status: 422
-    end
+    respond_success @post.update(post_params), @post
+  end
+
+  def like
+    respond_success @post.like, @post
+  end
+
+  def unlike
+    respond_success @post.unlike, @post
   end
 
   private
 
+  def set_model
+    @model = ::Post
+  end
+
   def set_post
-    @post = Post.find params[:id]
+    @post = @model.find params[:id]
   end
 
   def post_params
