@@ -21,6 +21,7 @@ class PostsController < ApplicationController
 
   def create
     @post = @model.new post_params
+    @post.files = params[:files] if params[:files].present?
     respond_success @post.save, @post
   end
 
@@ -43,7 +44,7 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @post = @model.find params[:id]
+    @post = ::Post.find params[:id]
   end
 
   def post_params

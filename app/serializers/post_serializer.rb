@@ -1,5 +1,5 @@
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :title, :description, :meta, :image, :comments
+  attributes :id, :title, :description, :meta, :image, :comments, :files
 
   def meta
     {
@@ -20,6 +20,15 @@ class PostSerializer < ActiveModel::Serializer
       c.user_avatar = "#{@instance_options[:url]}/#{c.user_avatar}"
     end
     object.comments
+  end
+
+  def files
+    object.files.map do |file|
+      {
+        url: "#{@instance_options[:url]}#{file.url}",
+        name: File.basename(file.url)
+      }
+    end
   end
 
 end
