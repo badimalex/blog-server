@@ -28,10 +28,10 @@ ActiveRecord::Schema.define(version: 20170521190447) do
     t.string   "title"
     t.string   "description"
     t.string   "author"
-    t.integer  "likes"
+    t.integer  "likes",       default: 0
     t.string   "image"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.json     "files"
   end
 
