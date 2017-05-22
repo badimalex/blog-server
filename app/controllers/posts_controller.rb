@@ -21,7 +21,6 @@ class PostsController < ApplicationController
 
   def create
     @post = @model.new post_params
-    @post.files = params[:files] if params[:files].present?
     respond_success @post.save, @post
   end
 
@@ -48,7 +47,9 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit :title, :description, :author, :created_at
+    post_params = params.require(:post).permit :title, :description, :author, :created_at
+    post_params[:files] = params[:files] if params[:files].present?
+    post_params
   end
 
 end
