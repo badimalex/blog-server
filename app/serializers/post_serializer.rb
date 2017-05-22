@@ -11,13 +11,13 @@ class PostSerializer < ActiveModel::Serializer
 
   def image
     {
-      src: "#{@instance_options[:url]}/#{object.image}"
+      src: full_path(object.image)
     }
   end
 
   def comments
     object.comments.map do |c|
-      c.user_avatar = "#{@instance_options[:url]}/#{c.user_avatar}"
+      c.user_avatar = full_path(c.user_avatar)
     end
     object.comments
   end
@@ -25,10 +25,16 @@ class PostSerializer < ActiveModel::Serializer
   def files
     object.files.map do |file|
       {
-        url: "#{@instance_options[:url]}#{file.url}",
+        url: full_path(file.url),
         name: File.basename(file.url)
       }
     end
+  end
+
+  private
+
+  def full_path(url)
+    "#{@instance_options[:url]}/#{url}"
   end
 
 end
