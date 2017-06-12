@@ -47,7 +47,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    post_params = params.require(:post).permit :title, :description, :author, :created_at
+    post_params = params.fetch(:post, {}).permit :title, :description, :author, :created_at
     post_params[:files] = params[:files] if params[:files].present?
     post_params
   end
